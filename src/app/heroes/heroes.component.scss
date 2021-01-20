@@ -7,3 +7,23 @@
   right: 30px;
   top: 69px;
 }
+
+.input-endpoint {
+  width: 50%;
+  padding: 20px;
+}
+
+.error-hint {
+  color: red;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spinner {
+  padding-right: 10px;
+}
