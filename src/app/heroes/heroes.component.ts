@@ -87,9 +87,6 @@ export class HeroesComponent implements OnInit {
       },
       (error) => {
         this.setError(error);
-
-        this.heroes = [];
-        this.isLoading = false;
       }
     );
   }

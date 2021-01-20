@@ -1,4 +1,4 @@
-# Heroes Crus
+# Heroes CRUD
 
 Frontend para testar o CRUD de Heroes do
 [Curso de Ruby on Rails 6 como API](https://www.youtube.com/watch?v=gTR6lx00Nac&list=PLqsayW8DhUmuvgOX08aXYk6Y-HGrdYg20).
@@ -35,4 +35,4 @@ Abra o navegador no endereço `http://localhost:4200`.
 
 ## Deploy
 
-Visite esse site em produção no endereço `https://heroes-crud.vercel.app`.
+Visite esse site em produção no endereço [https://heroes-crud.vercel.app](https://heroes-crud.vercel.app).
