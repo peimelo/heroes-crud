@@ -33,6 +33,11 @@ ng serve
 
 Abra o navegador no endereço `http://localhost:4200`.
 
+## Backend
+
+Espera-se que o backend suba em `http://localhost:3000`. Caso queira em outra porta,
+altere o arquivo `src/proxy.conf.json` e reinicie o frontend.
+
 ## Deploy
 
 Visite esse site em produção no endereço [https://heroes-crud.vercel.app](https://heroes-crud.vercel.app).
