@@ -41,7 +41,7 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
-  getHeroes(): void {
+  private getHeroes(): void {
     this.isLoading = true;
 
     this.heroesService.getAll(this.endpoint).subscribe(
@@ -70,9 +70,12 @@ export class HeroesComponent implements OnInit {
       data: { hero: {} },
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('The dialog was closed', result);
-      // this.animal = result;
+    dialogRef.afterClosed().subscribe((hero: Hero) => {
+      if (hero) {
+        this.heroesService
+          .create(hero, this.endpoint)
+          .subscribe(() => this.getHeroes());
+      }
     });
   }
 
@@ -87,12 +90,15 @@ export class HeroesComponent implements OnInit {
   edit(hero: Hero): void {
     const dialogRef = this.dialog.open(HeroDialogComponent, {
       width: '400px',
-      data: { hero },
+      data: { hero: { ...hero } },
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('The dialog was closed', result);
-      // this.animal = result;
+    dialogRef.afterClosed().subscribe((hero: Hero) => {
+      if (hero) {
+        this.heroesService
+          .update(hero, this.endpoint)
+          .subscribe(() => this.getHeroes());
+      }
     });
   }
 
