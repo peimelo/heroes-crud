@@ -18,12 +18,9 @@
 
         <input matInput [(ngModel)]="endpoint" (input)="onChangeEndpoint()" />
 
-        <mat-hint *ngIf="!error">
+        <mat-hint>
           Por exemplo, api/heroes ou
           https://curso-toh-api.herokuapp.com/api/heroes
-        </mat-hint>
-        <mat-hint class="error-hint" *ngIf="error">
-          {{ error }}
         </mat-hint>
       </mat-form-field>
 
@@ -33,6 +30,10 @@
         diameter="50"
       ></mat-spinner>
     </div>
+
+    <mat-hint class="error-hint" *ngIf="error">
+      {{ error }}
+    </mat-hint>
 
     <mat-table
       [dataSource]="heroes"

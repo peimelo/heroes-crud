@@ -52,11 +52,7 @@ export class HeroesComponent implements OnInit {
         this.isLoading = false;
       },
       (error) => {
-        if (error && error.message) {
-          this.error = error.message;
-        } else {
-          this.error = 'Endpoint inválido.';
-        }
+        this.setError(error);
 
         this.heroes = [];
         this.isLoading = false;
@@ -72,19 +68,30 @@ export class HeroesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((hero: Hero) => {
       if (hero) {
-        this.heroesService
-          .create(hero, this.endpoint)
-          .subscribe(() => this.getHeroes());
+        this.heroesService.create(hero, this.endpoint).subscribe(
+          () => this.getHeroes(),
+          (error) => {
+            this.setError(error);
+          }
+        );
       }
     });
   }
 
   delete(id: number): void {
-    this.heroesService.delete(id, this.endpoint).subscribe((response) => {
-      if (typeof response !== 'undefined') {
-        this.getHeroes();
+    this.heroesService.delete(id, this.endpoint).subscribe(
+      (response) => {
+        if (typeof response !== 'undefined') {
+          this.getHeroes();
+        }
+      },
+      (error) => {
+        this.setError(error);
+
+        this.heroes = [];
+        this.isLoading = false;
       }
-    });
+    );
   }
 
   edit(hero: Hero): void {
@@ -95,14 +102,25 @@ export class HeroesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((hero: Hero) => {
       if (hero) {
-        this.heroesService
-          .update(hero, this.endpoint)
-          .subscribe(() => this.getHeroes());
+        this.heroesService.update(hero, this.endpoint).subscribe(
+          () => this.getHeroes(),
+          (error) => {
+            this.setError(error);
+          }
+        );
       }
     });
   }
 
   onChangeEndpoint(): void {
     this.getHeroes();
+  }
+
+  private setError(error: any) {
+    if (error && error.message) {
+      this.error = error.message;
+    } else {
+      this.error = 'Endpoint inválido.';
+    }
   }
 }
