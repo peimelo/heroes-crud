@@ -16,23 +16,23 @@
   <button mat-button [mat-dialog-close]>Cancel</button>
 
   <button
-    [disabled]="!data.hero.name"
-    color="primary"
-    mat-button
     *ngIf="!isEditing"
-    type="button"
+    color="primary"
+    [disabled]="!data.hero.name"
+    mat-button
     [mat-dialog-close]="data.hero"
+    type="button"
   >
     Create
   </button>
 
   <button
-    [disabled]="!data.hero.name"
-    color="primary"
-    mat-button
     *ngIf="isEditing"
-    type="button"
+    color="primary"
+    [disabled]="!data.hero.name"
+    mat-button
     [mat-dialog-close]="data.hero"
+    type="button"
   >
     Update
   </button>

@@ -66,7 +66,7 @@ export class HeroesComponent implements OnInit {
 
   add(): void {
     const dialogRef = this.dialog.open(HeroDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: { hero: {} },
     });
 
