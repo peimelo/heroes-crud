@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>{{ isEditing ? "Update" : "Create" }} hero</h1>
+
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      [(ngModel)]="data.hero.name"
+      placeholder="Name"
+      required
+      type="text"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Cancel</button>
+
+  <button
+    [disabled]="!data.hero.name"
+    color="primary"
+    mat-button
+    *ngIf="!isEditing"
+    type="button"
+    [mat-dialog-close]="data.hero"
+  >
+    Create
+  </button>
+
+  <button
+    [disabled]="!data.hero.name"
+    color="primary"
+    mat-button
+    *ngIf="isEditing"
+    type="button"
+    [mat-dialog-close]="data.hero"
+  >
+    Update
+  </button>
+</div>

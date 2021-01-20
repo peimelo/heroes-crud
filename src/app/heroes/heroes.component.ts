@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
+import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
 import { Hero } from '../hero.model';
 import { HeroesService } from '../heroes.service';
 
@@ -24,7 +26,7 @@ export class HeroesComponent implements OnInit {
     direction: 'asc',
   };
 
-  constructor(private heroesService: HeroesService) {
+  constructor(public dialog: MatDialog, private heroesService: HeroesService) {
     const endpoint = localStorage.getItem('endpoint');
 
     if (endpoint) {
@@ -63,7 +65,15 @@ export class HeroesComponent implements OnInit {
   }
 
   add(): void {
-    // this.add.emit();
+    const dialogRef = this.dialog.open(HeroDialogComponent, {
+      width: '250px',
+      data: { hero: {} },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed', result);
+      // this.animal = result;
+    });
   }
 
   delete(id: number): void {
@@ -74,8 +84,16 @@ export class HeroesComponent implements OnInit {
     });
   }
 
-  edit(): void {
-    // this.add.emit();
+  edit(hero: Hero): void {
+    const dialogRef = this.dialog.open(HeroDialogComponent, {
+      width: '400px',
+      data: { hero },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed', result);
+      // this.animal = result;
+    });
   }
 
   onChangeEndpoint(): void {
