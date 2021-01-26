@@ -120,7 +120,7 @@ export class HeroesComponent implements OnInit {
   private setError(error: any) {
     console.log(error);
 
-    if (error && error.error) {
+    if (error.status === 422 && error && error.error) {
       Object.entries(error.error).map(([key, value]) => {
         this.error = this.error + `${key} ${value} `;
       });
