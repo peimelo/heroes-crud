@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
+import { environment } from '../../environments/environment';
 import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
 import { Hero } from '../hero.model';
 import { HeroesService } from '../heroes.service';
@@ -32,7 +33,10 @@ export class HeroesComponent implements OnInit {
     if (endpoint) {
       this.endpoint = endpoint;
     } else {
-      this.endpoint = 'api/heroes';
+      this.endpoint = environment.production
+        ? 'https://curso-tour-of-heroes-api.herokuapp.com/api/heroes'
+        : 'api/heroes';
+
       localStorage.setItem('endpoint', this.endpoint);
     }
   }
@@ -114,7 +118,13 @@ export class HeroesComponent implements OnInit {
   }
 
   private setError(error: any) {
-    if (error && error.message) {
+    console.log(error);
+
+    if (error && error.error) {
+      Object.entries(error.error).map(([key, value]) => {
+        this.error = this.error + `${key} ${value} `;
+      });
+    } else if (error && error.message) {
       this.error = error.message;
     } else {
       this.error = 'Endpoint inválido.';
